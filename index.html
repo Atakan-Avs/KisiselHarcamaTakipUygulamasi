@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kişisel Harcama Takip</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Kişisel Harcama Takip</h1>
+    <button id="dark-mode-toggle" aria-label="Karanlık Mod" type="button"></button>
+    <p>Harcamalarınızı kolayca yönetin ve analiz edin.</p>
+  </header>
+  <main>
+    <section class="container">
+      <div class="summary">
+        <div>Toplam Harcama: <span id="total-amount">0 ₺</span></div>
+        <div>
+          <label for="category-filter">Kategoriye göre filtrele:</label>
+          <div class="custom-dropdown" id="filter-dropdown">
+            <button type="button" class="dropdown-toggle" id="filter-toggle">Tümü</button>
+            <ul class="dropdown-menu" id="filter-menu">
+              <li data-value="all" class="selected">Tümü</li>
+              <li data-value="Yiyecek">Yiyecek</li>
+              <li data-value="Ulaşım">Ulaşım</li>
+              <li data-value="Eğlence">Eğlence</li>
+              <li data-value="Diğer">Diğer</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <form id="expense-form" autocomplete="off">
+        <input type="text" id="description" placeholder="Açıklama" required>
+        <div class="custom-dropdown" id="category-dropdown">
+          <button type="button" class="dropdown-toggle" id="category-toggle">Kategori</button>
+          <ul class="dropdown-menu" id="category-menu">
+            <li data-value="Yiyecek">Yiyecek</li>
+            <li data-value="Ulaşım">Ulaşım</li>
+            <li data-value="Eğlence">Eğlence</li>
+            <li data-value="Diğer">Diğer</li>
+          </ul>
+        </div>
+        <input type="number" id="amount" placeholder="Tutar (₺)" min="0.01" step="0.01" required>
+        <button type="submit">Ekle</button>
+      </form>
+      <div id="form-error" class="error-message" style="display:none;"></div>
+      <section>
+        <table id="expense-table">
+          <thead>
+            <tr>
+              <th>Tarih</th>
+              <th>Açıklama</th>
+              <th>Kategori</th>
+              <th>Tutar (₺)</th>
+              <th>Sil</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Harcama satırları buraya eklenecek -->
+          </tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
