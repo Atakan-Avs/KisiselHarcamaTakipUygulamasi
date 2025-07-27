@@ -1,4 +1,4 @@
-// --- DOM Elementleri ---
+// --- DOM Elements ---
 const form = document.getElementById('expense-form');
 const descriptionInput = document.getElementById('description');
 const amountInput = document.getElementById('amount');
@@ -6,8 +6,7 @@ const tableBody = document.querySelector('#expense-table tbody');
 const totalAmountSpan = document.getElementById('total-amount');
 const formError = document.getElementById('form-error');
 
-
-// Custom dropdownlar
+// Custom dropdowns
 const categoryDropdown = document.getElementById('category-dropdown');
 const categoryToggle = document.getElementById('category-toggle');
 const categoryMenu = document.getElementById('category-menu');
@@ -25,20 +24,20 @@ const STORAGE_KEY = 'expenses';
 const darkModeToggle = document.getElementById('dark-mode-toggle');
 const DARK_MODE_KEY = 'darkMode';
 
-// --- Harcamaları Yükle ---
+// --- Load Expenses ---
 let expenses = loadExpenses();
 renderExpenses();
 
-// --- Custom Dropdown Fonksiyonları ---
+// --- Custom Dropdown Functions ---
 function setupDropdown(dropdown, toggle, menu, onSelect) {
-  // Açma/kapama
+  // Toggle open/close
   toggle.addEventListener('click', function(e) {
     e.stopPropagation();
     closeAllDropdowns();
     dropdown.classList.toggle('open');
     toggle.classList.toggle('active');
   });
-  // Seçim
+  // Selection
   menu.querySelectorAll('li').forEach(li => {
     li.addEventListener('click', function(e) {
       menu.querySelectorAll('li').forEach(item => item.classList.remove('selected'));
@@ -50,20 +49,23 @@ function setupDropdown(dropdown, toggle, menu, onSelect) {
     });
   });
 }
+
 function closeAllDropdowns() {
   document.querySelectorAll('.custom-dropdown').forEach(d => d.classList.remove('open'));
   document.querySelectorAll('.dropdown-toggle').forEach(t => t.classList.remove('active'));
 }
+
 document.addEventListener('click', closeAllDropdowns);
 
-// Kategori dropdown
+// Category dropdown
 setupDropdown(
   categoryDropdown,
   categoryToggle,
   categoryMenu,
   function(value) { selectedCategory = value; }
 );
-// Filtre dropdown
+
+// Filter dropdown
 setupDropdown(
   filterDropdown,
   filterToggle,
@@ -79,9 +81,9 @@ form.addEventListener('submit', function(e) {
   const amount = parseFloat(amountInput.value);
   const submitBtn = form.querySelector('button[type="submit"]');
 
-  // Validasyon
+  // Validation
   if (!description || !category || isNaN(amount) || amount <= 0) {
-    showError('Lütfen tüm alanları doğru şekilde doldurun. Tutar pozitif olmalı.');
+    showError('Please fill in all fields correctly. Amount must be positive.');
     return;
   }
 
@@ -91,25 +93,25 @@ form.addEventListener('submit', function(e) {
     description,
     category,
     amount,
-    date: new Date().toLocaleString('tr-TR')
+    date: new Date().toLocaleString('en-US') // changed locale
   };
   expenses.push(expense);
   saveExpenses();
   renderExpenses();
   form.reset();
-  categoryToggle.textContent = 'Kategori';
+  categoryToggle.textContent = 'Category';
   selectedCategory = '';
 
-  // --- Başarı animasyonu ---
+  // --- Success animation ---
   submitBtn.classList.add('success');
-  submitBtn.textContent = 'Eklendi!';
+  submitBtn.textContent = 'Added!';
   setTimeout(() => {
     submitBtn.classList.remove('success');
-    submitBtn.textContent = 'Ekle';
+    submitBtn.textContent = 'Add';
   }, 900);
 });
 
-// --- Silme Olayı ---
+// --- Delete Event ---
 tableBody.addEventListener('click', function(e) {
   if (e.target.classList.contains('delete-btn')) {
     const id = Number(e.target.dataset.id);
@@ -119,7 +121,7 @@ tableBody.addEventListener('click', function(e) {
   }
 });
 
-// --- Fonksiyonlar ---
+// --- Functions ---
 function renderExpenses() {
   const filter = selectedFilter;
   let filtered = expenses;
@@ -136,7 +138,7 @@ function renderExpenses() {
       <td>${exp.description}</td>
       <td>${exp.category}</td>
       <td>${exp.amount.toFixed(2)} ₺</td>
-      <td><button class="delete-btn" data-id="${exp.id}">Sil</button></td>
+      <td><button class="delete-btn" data-id="${exp.id}">Delete</button></td>
     `;
     tableBody.appendChild(tr);
   });
@@ -183,8 +185,9 @@ darkModeToggle.addEventListener('click', function() {
   setDarkMode(!isDark);
 });
 
-// Sayfa açılışında dark mode'u yükle
+// Load dark mode on page load
 (function() {
   const saved = localStorage.getItem(DARK_MODE_KEY);
   setDarkMode(saved === '1');
-})(); 
+})();
+
