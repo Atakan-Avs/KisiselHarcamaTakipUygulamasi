@@ -1,63 +1,63 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kişisel Harcama Takip</title>
+  <title>Personal Expense Tracker</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header>
-    <h1>Kişisel Harcama Takip</h1>
-    <button id="dark-mode-toggle" aria-label="Karanlık Mod" type="button"></button>
-    <p>Harcamalarınızı kolayca yönetin ve analiz edin.</p>
+    <h1>Personal Expense Tracker</h1>
+    <button id="dark-mode-toggle" aria-label="Dark Mode" type="button"></button>
+    <p>Easily manage and analyze your expenses.</p>
   </header>
   <main>
     <section class="container">
       <div class="summary">
-        <div>Toplam Harcama: <span id="total-amount">0 ₺</span></div>
+        <div>Total Expenses: <span id="total-amount">0 ₺</span></div>
         <div>
-          <label for="category-filter">Kategoriye göre filtrele:</label>
+          <label for="category-filter">Filter by category:</label>
           <div class="custom-dropdown" id="filter-dropdown">
-            <button type="button" class="dropdown-toggle" id="filter-toggle">Tümü</button>
+            <button type="button" class="dropdown-toggle" id="filter-toggle">All</button>
             <ul class="dropdown-menu" id="filter-menu">
-              <li data-value="all" class="selected">Tümü</li>
-              <li data-value="Yiyecek">Yiyecek</li>
-              <li data-value="Ulaşım">Ulaşım</li>
-              <li data-value="Eğlence">Eğlence</li>
-              <li data-value="Diğer">Diğer</li>
+              <li data-value="all" class="selected">All</li>
+              <li data-value="Food">Food</li>
+              <li data-value="Transport">Transport</li>
+              <li data-value="Entertainment">Entertainment</li>
+              <li data-value="Other">Other</li>
             </ul>
           </div>
         </div>
       </div>
       <form id="expense-form" autocomplete="off">
-        <input type="text" id="description" placeholder="Açıklama" required>
+        <input type="text" id="description" placeholder="Description" required>
         <div class="custom-dropdown" id="category-dropdown">
-          <button type="button" class="dropdown-toggle" id="category-toggle">Kategori</button>
+          <button type="button" class="dropdown-toggle" id="category-toggle">Category</button>
           <ul class="dropdown-menu" id="category-menu">
-            <li data-value="Yiyecek">Yiyecek</li>
-            <li data-value="Ulaşım">Ulaşım</li>
-            <li data-value="Eğlence">Eğlence</li>
-            <li data-value="Diğer">Diğer</li>
+            <li data-value="Food">Food</li>
+            <li data-value="Transport">Transport</li>
+            <li data-value="Entertainment">Entertainment</li>
+            <li data-value="Other">Other</li>
           </ul>
         </div>
-        <input type="number" id="amount" placeholder="Tutar (₺)" min="0.01" step="0.01" required>
-        <button type="submit">Ekle</button>
+        <input type="number" id="amount" placeholder="Amount (₺)" min="0.01" step="0.01" required>
+        <button type="submit">Add</button>
       </form>
       <div id="form-error" class="error-message" style="display:none;"></div>
       <section>
         <table id="expense-table">
           <thead>
             <tr>
-              <th>Tarih</th>
-              <th>Açıklama</th>
-              <th>Kategori</th>
-              <th>Tutar (₺)</th>
-              <th>Sil</th>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Amount (₺)</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
-            <!-- Harcama satırları buraya eklenecek -->
+            <!-- Expense rows will be added here -->
           </tbody>
         </table>
       </section>
